@@ -109,16 +109,20 @@ namespace GameBarKiller
             }
         }
 
+        // Cycles through running processes an kills GameBarPresenceWriter.exe if it is present.
         private void ProcessKiller()
         {
             string procName = "GameBarPresenceWriter.exe";
-            Process[] processes = Process.GetProcessesByName(procName);
+            Process[] processes = Process.GetProcessesByName();
 
             foreach(Process process in processes)
             {
                 try
                 {
-                    process.Kill();
+                    if (process == procName)
+                    {
+                        process.Kill();
+                    }
                 } catch
                 {
                     throw new NotImplementedException();
